@@ -1,0 +1,14 @@
+h3{
+    margin-left: 450px;
+    color: red;
+}
+p{
+    margin-left: 25%;
+    color: green;
+}
+.content{
+    border: 20px solid black;
+    border-radius: 90px;
+    margin-right: 150px;
+    margin-left: 150px;
+}
