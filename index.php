@@ -1,48 +1,160 @@
-<!doctype html>
-<html lang="en">
+<?php
+session_start();
+
+if (!empty($_SESSION['admin']))
+{
+    if ($_SESSION['admin'])
+    {
+        ?>
+        <html>
+        <head>
+            <title>Административная панель</title>
+            <style type="text/css">
+                #wrap
+                {
+                    width: 100%;
+                    height: 100%;
+                }
+                .loginbox1
+                {
+                    width: 300px;
+                    padding: 4px;
+                    border: 1px solid #777;
+                    background-color: #777;
+                    color: white;
+                    font-weight: bold;
+                }
+                .loginbox2
+                {
+                    width: 300px;
+                    padding: 4px;
+                    border: 1px solid #777;
+                    color: #777;
+                }
+            </style>
+        </head>
+        <body>
+        <center>
+            <table cellpadding="0" cellspacing="0" id="wrap"><tr><td align="center">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr><td class="loginbox1" align="center">Вход выполнен</td></tr>
+                            <tr><td class="loginbox2" align="center"><a href="admin_main.php">Перейти к административной панели</a></td></tr>
+                        </table>
+                    </td></tr></table>
+        </center>
+        </body>
+        </html>
+        <?
+        exit;
+    }
+}
+
+$_SESSION['admin'] = false;
+include ('config.php');
+
+function not_logged_in()
+{
+    echo '<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="cmsStyle.css">
+<title>Административная панель</title>
+<style type="text/css">
+#wrap
+{
+width: 100%;
+height: 100%;
+}
+#wraptd
+{
+padding: 20px;
+}
+.loginbox1
+{
+width: 300px;
+padding: 4px;
+border: 1px solid #777;
+background-color: #777;
+color: white;
+font-weight: bold;
+}
+.loginbox2
+{
+width: 300px;
+padding: 4px;
+border: 1px solid #777;
+color: #777;
+}
+.loginbox2 input
+{
+width: 200px;
+margin: 3px 0;
+border-color: #888;
+color: #777;
+}
+</style>
 </head>
 <body>
-    <div class="content">
-        <div class="Pd">
-            <div class="news">
-                <h3>Lorem nam quasi quos vitae voluptas.</h3>
-                <p class="line">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-                    Accusamus cum debitis eligendi enim illum magnam, nam quasi quos vitae voluptas.<br><br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-                    Aliquid debitis delectus facilis, nesciunt nobis pariatur ratione reprehenderit rerum voluptatibus!<br>
-                    Accusantium animi aperiam distinctio earum fuga hic iure<br>
-                    laudantium molestias odio praesentium repellendus suscipit velit vero, voluptate, voluptatem.<br>
-                    Assumenda deleniti, temporibus.</p>
-            </div>
-            <div class="news">
-                <h3>Lorem debitis facilis aperiam odio, temporibus.</h3>
-                <p class="line">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-                    Accusamus cum debitis eligendi enim illum magnam, nam quasi quos vitae voluptas.<br><br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-                    Aliquid debitis delectus facilis, nesciunt nobis pariatur ratione reprehenderit rerum voluptatibus!<br>
-                    Accusantium animi aperiam distinctio earum fuga hic iure<br>
-                    laudantium molestias odio praesentium repellendus suscipit velit vero, voluptate, voluptatem.<br>
-                    Assumenda deleniti, temporibus.</p>
-            </div>
-            <div class="news">
-                <h3>Lorem animi aperiam distinctio aperiam.</h3>
-                <p class="line">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-                    Accusamus cum debitis eligendi enim illum magnam, nam quasi quos vitae voluptas.<br><br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>
-                    Aliquid debitis delectus facilis, nesciunt nobis pariatur ratione reprehenderit rerum voluptatibus!<br>
-                    Accusantium animi aperiam distinctio earum fuga hic iure<br>
-                    laudantium molestias odio praesentium repellendus suscipit velit vero, voluptate, voluptatem.<br>
-                    Assumenda deleniti, temporibus.</p>
-            </div>
-        </div>
-    </div>
+<center>
+<table cellpadding="0" cellspacing="0" id="wrap"><tr><td align="center" id="wraptd">
+<table cellpadding="0" cellspacing="0">
+<tr><td class="loginbox1" align="center">Вход в административную панель</td></tr>
+<tr><td class="loginbox2" align="center">
+<form action="index.php" method="post">
+<input type="text" name="login" value="Логин"><br>
+<input type="text" name="password" value="Пароль"><br>
+<input type="submit" value="Войти">
+</form>
+</td></tr>
+</table>
+</td></tr></table>
+</center>
+</body>
+</html>';
+    exit;
+}
+
+if(!$_POST) not_logged_in();
+if(!$_POST['login']) not_logged_in();
+if(!$_POST['password']) not_logged_in();
+if($_POST['login'] != $adminlogin) not_logged_in();
+if($_POST['password'] != $adminpassw) not_logged_in();
+
+$_SESSION['admin'] = true;
+?>
+<html>
+<head>
+    <title>Административная панель</title>
+    <style type="text/css">
+        #wrap
+        {
+            width: 100%;
+            height: 100%;
+        }
+        .loginbox1
+        {
+            width: 300px;
+            padding: 4px;
+            border: 1px solid #777;
+            background-color: #777;
+            color: white;
+            font-weight: bold;
+        }
+        .loginbox2
+        {
+            width: 300px;
+            padding: 4px;
+            border: 1px solid #777;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table cellpadding="0" cellspacing="0" id="wrap"><tr><td align="center">
+                <table cellpadding="0" cellspacing="0">
+                    <tr><td class="loginbox1" align="center">Вход выполнен</td></tr>
+                    <tr><td class="loginbox2" align="center"><a href="admin_main.php">Перейти к административной панели</a></td></tr>
+                </table>
+            </td></tr></table>
+</center>
 </body>
 </html>
-
-<?php
-    
-?>
